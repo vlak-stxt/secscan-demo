@@ -2,7 +2,7 @@
 
 This is a demo project to test automatic code scanning and reporting
 
-⚠️ Not for production use.
+⚠️ **Not for production use.**
 
 Results are available in Action log, but are also pushed to GitHub code scanning alerts if Advanced Security is available.
 Checks will not fail if pushing is not possible (due to missing license etc).
