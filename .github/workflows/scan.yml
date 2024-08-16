@@ -38,7 +38,7 @@ jobs:
         with:
           args: -fmt sarif -out gosec.sarif -stdout -verbose=text ./...
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         # run this even when the gosec task fails (otherwise we wouldn't get a result)
         if: success() || failure()
         # but ignore errors in case GH security upload isn't available
@@ -75,7 +75,7 @@ jobs:
           format: lovely,sarif
           additional_args: --out results
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: success() || failure()
         continue-on-error: true
         with:
@@ -88,7 +88,7 @@ jobs:
         with:
           persist-credentials: false
           sparse-checkout: python/
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       # We're not using the official action because Bandit doesn't include the SARIF formatter by default.
@@ -105,12 +105,12 @@ jobs:
         run: |
           bandit --recursive --format screen python/
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: success() || failure()
         continue-on-error: true
         with:
           sarif_file: results.sarif
-  chekov-terraform:
+  checkov-terraform:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo
@@ -125,12 +125,12 @@ jobs:
           output_format: cli,sarif
           output_file_path: console,results.sarif
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: success() || failure()
         continue-on-error: true
         with:
           sarif_file: results.sarif
-  chekov-bicep:
+  checkov-bicep:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo
@@ -145,7 +145,7 @@ jobs:
           output_format: cli,sarif
           output_file_path: console,results.sarif
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: success() || failure()
         continue-on-error: true
         with:
@@ -161,14 +161,14 @@ jobs:
           persist-credentials: false
           sparse-checkout: go/
       - name: codeql init
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: go
       - name: codeql autobuild
-        uses: github/codeql-action/autobuild@v2
+        uses: github/codeql-action/autobuild@v3
       - name: codeql analysis
         id: analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
         with:
           category: "/language:go"
       - name: print results
@@ -184,14 +184,14 @@ jobs:
           persist-credentials: false
           sparse-checkout: python/
       - name: codeql init
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: python
       - name: codeql autobuild
-        uses: github/codeql-action/autobuild@v2
+        uses: github/codeql-action/autobuild@v3
       - name: codeql analysis
         id: analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
         with:
           category: "/language:python"
       - name: print results
@@ -206,7 +206,7 @@ jobs:
         with:
           persist-credentials: false
           sparse-checkout: python/
-      - uses: pypa/gh-action-pip-audit@v1.0.0
+      - uses: pypa/gh-action-pip-audit@v1.1.0
         with:
           inputs: requirements.txt
       # SARIF reports aren't supported by pip-audit yet:
