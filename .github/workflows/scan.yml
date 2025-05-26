@@ -69,7 +69,7 @@ jobs:
           persist-credentials: false
           sparse-checkout: terraform/
       - name: run tfsec
-        uses: aquasecurity/tfsec-action@v1.0.0
+        uses: aquasecurity/tfsec-action@v1.0.3
         with:
           working_directory: terraform/
           format: lovely,sarif
