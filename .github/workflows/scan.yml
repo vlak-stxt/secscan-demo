@@ -88,7 +88,7 @@ jobs:
         with:
           persist-credentials: false
           sparse-checkout: python/
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       # We're not using the official action because Bandit doesn't include the SARIF formatter by default.
