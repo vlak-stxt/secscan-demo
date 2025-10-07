@@ -90,7 +90,7 @@ jobs:
           sparse-checkout: python/
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.14'
       # We're not using the official action because Bandit doesn't include the SARIF formatter by default.
       - name: install bandit
         # we could bind a specific Bandit and SARIF formatter version here
