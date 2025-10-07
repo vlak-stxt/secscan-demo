@@ -38,7 +38,7 @@ jobs:
         with:
           args: -fmt sarif -out gosec.sarif -stdout -verbose=text ./...
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         # run this even when the gosec task fails (otherwise we wouldn't get a result)
         if: success() || failure()
         # but ignore errors in case GH security upload isn't available
@@ -75,7 +75,7 @@ jobs:
           format: lovely,sarif
           additional_args: --out results
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: success() || failure()
         continue-on-error: true
         with:
@@ -105,7 +105,7 @@ jobs:
         run: |
           bandit --recursive --format screen python/
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: success() || failure()
         continue-on-error: true
         with:
@@ -125,7 +125,7 @@ jobs:
           output_format: cli,sarif
           output_file_path: console,results.sarif
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: success() || failure()
         continue-on-error: true
         with:
@@ -145,7 +145,7 @@ jobs:
           output_format: cli,sarif
           output_file_path: console,results.sarif
       - name: upload results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: success() || failure()
         continue-on-error: true
         with:
@@ -161,14 +161,14 @@ jobs:
           persist-credentials: false
           sparse-checkout: go/
       - name: codeql init
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: go
       - name: codeql autobuild
-        uses: github/codeql-action/autobuild@v3
+        uses: github/codeql-action/autobuild@v4
       - name: codeql analysis
         id: analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           category: "/language:go"
       - name: print results
@@ -184,14 +184,14 @@ jobs:
           persist-credentials: false
           sparse-checkout: python/
       - name: codeql init
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: python
       - name: codeql autobuild
-        uses: github/codeql-action/autobuild@v3
+        uses: github/codeql-action/autobuild@v4
       - name: codeql analysis
         id: analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           category: "/language:python"
       - name: print results
