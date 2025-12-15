@@ -1,4 +1,4 @@
-resource symbolicname 'Microsoft.KeyVault/vaults@2022-07-01' = {
+resource symbolicname 'Microsoft.KeyVault/vaults@2022-11-01' = {
   name: 'hackme'
   location: 'eastus'
   properties: {
